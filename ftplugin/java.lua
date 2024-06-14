@@ -30,15 +30,22 @@ local config = {
     "-data",
     workspace_dir,
   },
-  root_dir = require("jdtls.setup").find_root { ".git", "mvnw", "gradlew", "pom.xml", "build.gradle" },
+  root_dir = require("lspconfig").util.root_pattern(
+		".git",
+		"mvnw",
+		"gradlew",
+		"pom.xml",
+		"build.gradle",
+		"build.gradle.kts"
+	)(vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf())),
 
   settings = {
     java = {
       configuration = {
         runtimes = {
-          name = 'JavaSE-21',
-          path = '/usr/lib/jvm/openjdk-21.0.2/',
-          javadoc = 'https://docs.oracle.com/en/java/javase/21/docs/api/',
+          name = "JavaSE-21",
+          path = "/usr/lib/jvm/openjdk-21.0.2/",
+          javadoc = "https://docs.oracle.com/en/java/javase/21/docs/api/",
           default = true,
         },
       },
@@ -69,4 +76,5 @@ local config = {
     bundles = {},
   },
 }
+
 require("jdtls").start_or_attach(config)

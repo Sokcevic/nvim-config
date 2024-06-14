@@ -6,8 +6,6 @@ local capabilities = require("nvchad.configs.lspconfig").capabilities
 require("mason").setup()
 require("mason-lspconfig").setup()
 
-
-
 local lspconfig = require "lspconfig"
 
 -- local servers = { "html", "cssls", "dartls", "jdtls", "clangd", "pylsp", "ocamllsp"}
@@ -44,15 +42,13 @@ require("mason-lspconfig").setup_handlers {
   --["rust_analyzer"] = function ()
   --    require("rust-tools").setup {}
   --end
-  ["jdtls"] = function ()
-  end
 }
 lspconfig["lua_ls"].setup {
   settings = {
-        Lua = {
-            diagnostics = {
-                globals = { 'vim' }
-            }
-        }
-    }
+    Lua = {
+      diagnostics = {
+        globals = { "vim" },
+      },
+    },
+  },
 }
