@@ -115,3 +115,12 @@ require("lsp_signature").setup(cfg) -- no need to specify bufnr if you don't use
 
 -- You can also do this inside lsp on_attach
 -- note: on_attach deprecated
+--
+--
+-- Config lsp_lines
+
+require("lsp_lines").setup()
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+  virtual_text = false,
+})
+vim.keymap.set("", "<Leader>l", require("lsp_lines").toggle, { desc = "Toggle lsp_lines" })

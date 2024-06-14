@@ -44,4 +44,15 @@ require("mason-lspconfig").setup_handlers {
   --["rust_analyzer"] = function ()
   --    require("rust-tools").setup {}
   --end
+  ["jdtls"] = function ()
+  end
+}
+lspconfig["lua_ls"].setup {
+  settings = {
+        Lua = {
+            diagnostics = {
+                globals = { 'vim' }
+            }
+        }
+    }
 }
