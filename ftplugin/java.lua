@@ -3,6 +3,10 @@ local workspace_path = home .. "/.local/share/nvim/jdtls-workspace/"
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
 local workspace_dir = workspace_path .. project_name
 
+local on_attach = require("nvchad.configs.lspconfig").on_attach
+local on_init = require("nvchad.configs.lspconfig").on_init
+local capabilities = require("nvchad.configs.lspconfig").capabilities
+
 local status, jdtls = pcall(require, "jdtls")
 if not status then
   return
@@ -10,6 +14,9 @@ end
 local extendedClientCapabilities = jdtls.extendedClientCapabilities
 
 local config = {
+  on_attach = on_attach,
+  on_init = on_init,
+  capabilities = capabilities,
   cmd = {
     "java",
     "-Declipse.application=org.eclipse.jdt.ls.core.id1",
@@ -31,13 +38,13 @@ local config = {
     workspace_dir,
   },
   root_dir = require("lspconfig").util.root_pattern(
-		".git",
-		"mvnw",
-		"gradlew",
-		"pom.xml",
-		"build.gradle",
-		"build.gradle.kts"
-	)(vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf())),
+    ".git",
+    "mvnw",
+    "gradlew",
+    "pom.xml",
+    "build.gradle",
+    "build.gradle.kts"
+  )(vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf())),
 
   settings = {
     java = {
