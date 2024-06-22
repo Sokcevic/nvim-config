@@ -96,7 +96,7 @@ local cfg = {
   shadow_blend = 36, -- if you using shadow as border use this set the opacity
   shadow_guibg = "Black", -- if you using shadow as border use this set the color e.g. 'Green' or '#121315'
   timer_interval = 200, -- default timer check interval set to lower value if you want to reduce latency
-  toggle_key = '<C-S>', -- toggle signature on and off in insert mode,  e.g. toggle_key = '<M-x>'
+  toggle_key = "<C-S>", -- toggle signature on and off in insert mode,  e.g. toggle_key = '<M-x>'
   toggle_key_flip_floatwin_setting = false, -- true: toggle floating_windows: true|false setting after toggle key pressed
   -- false: floating_windows setup will not change, toggle_key will pop up signature helper, but signature
   -- may not popup when typing depends on floating_window setting
@@ -126,3 +126,39 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagn
 vim.keymap.set("", "<Leader>l", require("lsp_lines").toggle, { desc = "Toggle lsp_lines" })
 
 require("barbecue.ui").toggle(true)
+
+local dap = require "dap"
+dap.adapters.cppdbg = {
+  id = "cppdbg",
+  type = "executable",
+  command = "/home/lukassokcevic/DebugTools/cpptools-linux/extension/debugAdapters/bin/OpenDebugAD7", -- Update this path
+  options = {
+    detached = false,
+  },
+}
+
+dap.configurations.cpp = {
+  {
+    name = "Launch",
+    type = "cppdbg",
+    request = "launch",
+    program = function()
+      return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+    end,
+    cwd = "${workspaceFolder}",
+    stopOnEntry = false,
+    args = {},
+
+    setupCommands = {
+      {
+        text = "-enable-pretty-printing",
+        description = "enable pretty printing",
+        ignoreFailures = false,
+      },
+    },
+    miDebuggerPath = "gdb", -- Ensure this points to your gdb executable
+  },
+}
+dap.configurations.c = dap.configurations.cpp
+require("dap").set_log_level "DEBUG"
+require("dapui").setup()

@@ -13,6 +13,21 @@ if not status then
 end
 local extendedClientCapabilities = jdtls.extendedClientCapabilities
 
+local ok_mason, mason_registry = pcall(require, "mason-registry")
+if not ok_mason then
+    vim.notify("mason-registry could not be loaded")
+    return
+end
+
+local java_test_path = mason_registry.get_package("java-test"):get_install_path()
+local java_debug_adapter_path = mason_registry.get_package("java-debug-adapter"):get_install_path()
+local bundles = {}
+vim.list_extend(bundles, vim.split(vim.fn.glob(java_test_path .. "/extension/server/*.jar"), "\n"))
+vim.list_extend(
+    bundles,
+    vim.split(vim.fn.glob(java_debug_adapter_path .. "/extension/server/com.microsoft.java.debug.plugin-*.jar"), "\n")
+)
+
 local config = {
   on_attach = on_attach,
   on_init = on_init,
@@ -80,8 +95,9 @@ local config = {
   },
 
   init_options = {
-    bundles = {},
+    bundles = bundles,
   },
 }
 
+require('jdtls').setup_dap({ hotcodereplace = 'auto' })
 require("jdtls").start_or_attach(config)

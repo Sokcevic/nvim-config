@@ -23,7 +23,12 @@ return {
   },
   {
     "mfussenegger/nvim-jdtls",
+    dependencies = {
+      'mfussenegger/nvim-dap'
+    }
   },
+  { 'mfussenegger/nvim-dap', lazy=false },
+  { "rcarriga/nvim-dap-ui", dependencies = {"nvim-neotest/nvim-nio"} },
   {
     "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
     config = function()
