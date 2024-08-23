@@ -1,6 +1,13 @@
 vim.g.base46_cache = vim.fn.stdpath "data" .. "/nvchad/base46/"
 vim.g.mapleader = ","
 
+vim.opt.shell = "/usr/bin/zsh"
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.expandtab = true
+vim.opt.shiftwidth = 4
+vim.opt.tabstop = 4
+vim.opt.smartindent = true
 -- bootstrap lazy and all plugins
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 
@@ -25,8 +32,7 @@ require("lazy").setup({
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
     "neovim/nvim-lspconfig",
-}
-,
+  },
   { import = "plugins" },
 }, lazy_config)
 
