@@ -4,7 +4,7 @@ local capabilities = require("nvchad.configs.lspconfig").capabilities
 
 require("mason").setup()
 require("mason-lspconfig").setup {
-  ensure_installed = {  "html", "cssls", "dartls", "jdtls", "clangd", "pylsp", "ocamllsp", "java-debug-adapter"}
+  ensure_installed = {  "html", "cssls", "dartls", "jdtls", "clangd", "pylsp", "java-debug-adapter"}
 }
 
 local lspconfig = require "lspconfig"
@@ -52,7 +52,6 @@ require("mason-lspconfig").setup_handlers {
       capabilities = capabilities,
       cmd = {
         "/home/lukassokcevic/.local/share/nvim/mason/bin/clangd",
-        "--clang-tidy-checks=-*,cuda-*,-clang-diagnostic-cuda*"
       }
     }
 
