@@ -4,7 +4,7 @@ local capabilities = require("nvchad.configs.lspconfig").capabilities
 
 require("mason").setup()
 require("mason-lspconfig").setup {
-  ensure_installed = {  "html", "cssls", "dartls", "jdtls", "clangd", "pylsp", "java-debug-adapter"}
+  ensure_installed = {  "html", "cssls", "dartls", "jdtls", "clangd", "pylsp", "java-debug"}
 }
 
 local lspconfig = require "lspconfig"
