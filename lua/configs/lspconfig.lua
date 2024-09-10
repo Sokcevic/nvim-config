@@ -3,9 +3,7 @@ local on_init = require("nvchad.configs.lspconfig").on_init
 local capabilities = require("nvchad.configs.lspconfig").capabilities
 
 require("mason").setup()
-require("mason-lspconfig").setup {
-  ensure_installed = {  "html", "cssls", "dartls", "jdtls", "clangd", "pylsp", "java-debug-adapter"}
-}
+require("mason-lspconfig")
 
 local lspconfig = require "lspconfig"
 
@@ -21,7 +19,7 @@ local lspconfig = require "lspconfig"
 --end
 
 -- typescript
-lspconfig.tsserver.setup {
+lspconfig.ts_ls.setup {
   on_attach = on_attach,
   on_init = on_init,
   capabilities = capabilities,
