@@ -32,20 +32,4 @@ return {
       -- configurations go here
     },
   },
-  {
-    "williamboman/mason.nvim",
-    opts = {
-      ensure_installed = {
-        "lua-language-server",
-        "stylua",
-        "html-lsp",
-        "css-lsp",
-        "prettier",
-        "jdtls",
-        "clangd",
-        "pyright",
-        "java-debug-adapter"
-      },
-    },
-  },
 }
