@@ -8,7 +8,14 @@ vim.opt.expandtab = true
 vim.opt.shiftwidth = 4
 vim.opt.tabstop = 4
 vim.opt.smartindent = true
-vim.opt_local.conceallevel = 2
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "markdown", "tex" },
+  callback = function()
+    vim.wo.conceallevel = 2
+  end,
+})
+
 -- bootstrap lazy and all plugins
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 
@@ -130,6 +137,8 @@ vim.diagnostic.config {
   virtual_text = false,
   underline = false,
 }
+
+require("dapui").setup()
 
 local dap = require "dap"
 dap.adapters.cppdbg = {

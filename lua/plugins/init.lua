@@ -66,8 +66,8 @@ return {
     opts = {
       workspaces = {
         {
-          name = "Obsidian Vault",
-          path = "~/Documents/Obsidian Vault/",
+          name = "iSYS",
+          path = "~/Documents/Obsidian Vault/iSYS",
         },
       },
     },
